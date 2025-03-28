@@ -42,6 +42,7 @@ describe('usersRepository', () => {
           password: user.password,
         },
         select: {
+          id: true,
           name: true,
           email: true,
         },
@@ -72,8 +73,10 @@ describe('usersRepository', () => {
           email,
         },
         select: {
+          id: true,
           name: true,
           email: true,
+          password: true,
         },
       });
 

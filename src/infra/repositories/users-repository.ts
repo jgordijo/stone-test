@@ -10,6 +10,7 @@ export const usersRepository = {
         password,
       },
       select: {
+        id: true,
         name: true,
         email: true,
       },
@@ -21,8 +22,10 @@ export const usersRepository = {
         email,
       },
       select: {
+        id: true,
         name: true,
         email: true,
+        password: true,
       },
     });
   },

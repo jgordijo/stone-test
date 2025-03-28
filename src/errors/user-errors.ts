@@ -4,3 +4,10 @@ export class EmailInUseError extends Error {
     this.name = 'EmailInUseError';
   }
 }
+
+export class UserAuthError extends Error {
+  constructor() {
+    super('Invalid credentials');
+    this.name = 'UserAuthError';
+  }
+}

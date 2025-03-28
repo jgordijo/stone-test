@@ -12,7 +12,7 @@ import {
   hasZodFastifySchemaValidationErrors,
   isResponseSerializationError,
 } from 'fastify-type-provider-zod';
-import { EmailInUseError } from './errors/user-errors';
+import { EmailInUseError, UserAuthError } from './errors/user-errors';
 import { helloWorldRoute } from './routes/hello-world-route';
 import { userRoutes } from './routes/users';
 
@@ -59,7 +59,16 @@ app.setErrorHandler((error, request, reply) => {
     return reply.status(409).send({
       statusCode: 409,
       code: 'EMAIL_IN_USE',
-      error: 'Bad Request',
+      error: 'Conflict',
+      message: error.message,
+    });
+  }
+
+  if (error instanceof UserAuthError) {
+    return reply.status(401).send({
+      statusCode: 401,
+      code: 'INVALID_CREDENTIALS',
+      error: 'Unauthorized',
       message: error.message,
     });
   }
