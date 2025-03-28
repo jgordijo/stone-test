@@ -1,3 +1,4 @@
+import jwt from '@fastify/jwt';
 import rateLimit, { fastifyRateLimit } from '@fastify/rate-limit';
 import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
@@ -13,6 +14,7 @@ import {
   hasZodFastifySchemaValidationErrors,
   isResponseSerializationError,
 } from 'fastify-type-provider-zod';
+import { env } from './env';
 import { EmailInUseError, UserAuthError } from './errors/user-errors';
 import { helloWorldRoute } from './routes/hello-world-route';
 import { productRoutes } from './routes/products';
@@ -111,6 +113,10 @@ app.register(fastifySwaggerUi, {
 
 app.register(rateLimit, {
   global: false,
+});
+
+app.register(jwt, {
+  secret: env.JWT_SECRET,
 });
 
 app.register(helloWorldRoute);

@@ -1,12 +1,13 @@
-import rateLimit from '@fastify/rate-limit';
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod';
 import { z } from 'zod';
+import { verifyJWT } from '../../infra/middlewares/verify-jwt';
 import { getProducts } from '../../useCases/products/get-products';
 
 export const getProductsRoute: FastifyPluginAsyncZod = async app => {
   app.get(
     '/products',
     {
+      preHandler: verifyJWT,
       config: {
         rateLimit: {
           max: 20,
