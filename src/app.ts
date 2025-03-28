@@ -1,5 +1,6 @@
 import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
+import { Prisma } from '@prisma/client';
 import { fastify } from 'fastify';
 import {
   type ZodTypeProvider,
@@ -11,7 +12,9 @@ import {
   hasZodFastifySchemaValidationErrors,
   isResponseSerializationError,
 } from 'fastify-type-provider-zod';
+import { EmailInUseError } from './errors/user-errors';
 import { helloWorldRoute } from './routes/hello-world-route';
+import { userRoutes } from './routes/users';
 
 const app = fastify({
   logger: {
@@ -43,6 +46,24 @@ app.setErrorHandler((error, request, reply) => {
     });
   }
 
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    return reply.status(500).send({
+      statusCode: 500,
+      code: 'DATABASE_ERROR',
+      error: 'Database error',
+      message: error.message,
+    });
+  }
+
+  if (error instanceof EmailInUseError) {
+    return reply.status(409).send({
+      statusCode: 409,
+      code: 'EMAIL_IN_USE',
+      error: 'Bad Request',
+      message: error.message,
+    });
+  }
+
   return reply.status(500).send({
     statusCode: 500,
     code: 'INTERNAL_SERVER_ERROR',
@@ -69,5 +90,7 @@ app.register(fastifySwaggerUi, {
 });
 
 app.register(helloWorldRoute);
+
+app.register(userRoutes);
 
 export { app };
