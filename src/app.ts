@@ -1,3 +1,4 @@
+import rateLimit, { fastifyRateLimit } from '@fastify/rate-limit';
 import { fastifySwagger } from '@fastify/swagger';
 import { fastifySwaggerUi } from '@fastify/swagger-ui';
 import { Prisma } from '@prisma/client';
@@ -28,6 +29,15 @@ const app = fastify({
 
 app.setErrorHandler((error, request, reply) => {
   request.log.error(error);
+
+  if (error.statusCode === 429) {
+    return reply.code(429).send({
+      error: 'Too many requests',
+      code: 'RATE_LIMIT',
+      message: 'You hit the rate limit',
+      statusCode: 429,
+    });
+  }
 
   if (hasZodFastifySchemaValidationErrors(error)) {
     return reply.code(400).send({
@@ -97,6 +107,10 @@ app.register(fastifySwagger, {
 
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
+});
+
+app.register(rateLimit, {
+  global: false,
 });
 
 app.register(helloWorldRoute);

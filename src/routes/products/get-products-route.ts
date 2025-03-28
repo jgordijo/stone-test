@@ -1,3 +1,4 @@
+import rateLimit from '@fastify/rate-limit';
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod';
 import { z } from 'zod';
 import { getProducts } from '../../useCases/products/get-products';
@@ -6,6 +7,12 @@ export const getProductsRoute: FastifyPluginAsyncZod = async app => {
   app.get(
     '/products',
     {
+      config: {
+        rateLimit: {
+          max: 20,
+          timeWindow: '1 minute',
+        },
+      },
       schema: {
         summary: 'Retrieves product list',
         tags: ['products'],
