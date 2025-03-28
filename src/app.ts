@@ -14,6 +14,7 @@ import {
 } from 'fastify-type-provider-zod';
 import { EmailInUseError, UserAuthError } from './errors/user-errors';
 import { helloWorldRoute } from './routes/hello-world-route';
+import { productRoutes } from './routes/products';
 import { userRoutes } from './routes/users';
 
 const app = fastify({
@@ -101,5 +102,7 @@ app.register(fastifySwaggerUi, {
 app.register(helloWorldRoute);
 
 app.register(userRoutes);
+
+app.register(productRoutes);
 
 export { app };
