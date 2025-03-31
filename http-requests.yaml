@@ -1,0 +1,152 @@
+type: collection.insomnia.rest/5.0
+name: Stone
+meta:
+  id: wrk_ca72c3cba4114e4eba0ab75392c6b460
+  created: 1743108890431
+  modified: 1743108890431
+collection:
+  - name: Users
+    meta:
+      id: fld_51dbe75d755649f19dd7112cce08c285
+      created: 1743108928568
+      modified: 1743108928568
+      sortKey: -1743108928568
+    children:
+      - url: "{{base_url}}/register"
+        name: Register
+        meta:
+          id: req_de68c22a20704fcf931d00189bcdb3c9
+          created: 1743108932230
+          modified: 1743430670456
+          isPrivate: false
+          sortKey: -1743108934812
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "",
+            	"password": "",
+            	"passwordConfirmation": "",
+            	"email": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{base_url}}/login"
+        name: Login
+        meta:
+          id: req_44ee24d204a94e219d2b78bf9eec9305
+          created: 1743176844719
+          modified: 1743430655880
+          isPrivate: false
+          sortKey: -1743108934912
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"password": "",
+            	"email": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Products
+    meta:
+      id: fld_14963a443c174d489e73b72e47e596eb
+      created: 1743180291567
+      modified: 1743180291567
+      sortKey: -1743180291567
+    children:
+      - url: "{{base_url}}/products"
+        name: Get Products
+        meta:
+          id: req_080494cd73b44d4d9f7179173f599f30
+          created: 1743180294557
+          modified: 1743430631550
+          isPrivate: false
+          sortKey: -1743180296319
+        method: GET
+        parameters:
+          - id: pair_705d3748dadc4b62840b816542c2296b
+            name: page
+            value: "1"
+            disabled: true
+          - id: pair_dfcb83891dbd429c99f679b41fdf7e16
+            name: name
+            value: ovo
+            disabled: true
+          - id: pair_b2712411ceb74c3091c4c7693fb47f00
+            name: pageSize
+            value: "5"
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: "{{base_url}}/hello"
+    name: Hello World
+    meta:
+      id: req_a4c5dcc8c23a4dbcba89869eff4e9628
+      created: 1743108911952
+      modified: 1743108922210
+      isPrivate: false
+      sortKey: -1743108911952
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_32dc631065408da0bf3f8e66ed176fca3f8e4623
+    created: 1743108890442
+    modified: 1743108890442
+environments:
+  name: Base Environment
+  meta:
+    id: env_32dc631065408da0bf3f8e66ed176fca3f8e4623
+    created: 1743108890436
+    modified: 1743108907149
+    isPrivate: false
+  data:
+    base_url: http://localhost:3333
