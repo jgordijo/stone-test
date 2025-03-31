@@ -23,11 +23,6 @@ module.exports = {
     '/src/env.ts',
     '/src/routes/.*/index.ts'
   ],
-  transform: {
-    '^.+\\.ts?$': ['ts-jest', {
-      isolatedModules: true,
-    }],
-  },
   collectCoverageFrom: ['src/**/*.ts'],
   bail: 1,
   collectCoverage: true,
