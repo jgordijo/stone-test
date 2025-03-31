@@ -6,7 +6,7 @@
 
 ## 🤔 Considerations
 - There's no CRUD for products, so the table is being filled by a `seed.ts` script by Prisma when running the first migrations.
-- THere are schema `zod` schema validations that ensure some minimum requirements for the password:
+- There are `zod` schema validations that ensure some minimum requirements for the password:
   - Minimum of 8 characters
   - Maximum of 20 characters
   - At least one uppercase letter
@@ -28,12 +28,13 @@
 - Add environment variables - `cp .env.example .env`
 - Run `docker compose up -d`.
 - Run `npx prisma migrate dev` to run the database migrations and seed the DB with sample products.
-- Start the service running `npm run start`. The service will run on port 3333 by default.
+- Run `npm run build` to build the application.
+- Start the service by running `npm run start`. The service will run on port 3333 by default.
 - You can also run the server using `npm run dev`. Running that way will watch changes and automatically restart the server.
 - You can run `npx prisma studio` to see the database records directly through your browser at `http://localhost:5555`
 
 ## 📖 API Usage
-- Example for creating a product
+- Example for creating an user
 ```bash
 curl --request POST \
   --url http://localhost:3333/register \
