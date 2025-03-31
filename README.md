@@ -59,6 +59,9 @@ curl --request POST \
 - This project has 100% test coverage using Jest, including unit and integration tests.
 - The test suite is ran by `npm test` or `npm run test`.
 
+![image](https://github.com/user-attachments/assets/b91ddaec-676f-48c4-b972-aece1ad040ab)
+
+
 ## 📁 File Tree Structure
 
 ```bash
